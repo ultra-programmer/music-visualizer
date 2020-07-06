@@ -152,7 +152,6 @@ public class MusicVisualizer extends PApplet {
             }
 
             // Play the next song
-            System.out.println(counter);
             audio[counter].play();
 
             // Rewind the previous audio track
