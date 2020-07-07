@@ -31,6 +31,9 @@ public class MusicVisualizer extends PApplet {
     private boolean isPaused;
     private boolean isMuted;
 
+    // Keep track of whether or not a song is repeating
+    private boolean isRepeating;
+
     // Images for play/pause icons
     PImage play;
     PImage pause;
@@ -42,10 +45,14 @@ public class MusicVisualizer extends PApplet {
     // Image for fast-forward icon
     PImage ff;
 
+    // Image for repeat button
+    PImage repeat;
+
     // Coordinates for play/pause button
     private final int[] pauseCoors = {20, 20};
     private final int[] muteCoors = {90, 20};
     private final int[] ffCoors = {160, 20};
+    private final int[] repeatCoors = {230, 20};
 
     // Colors for channels
     private final int leftChannelColor = color(37, 152, 230);
@@ -85,6 +92,7 @@ public class MusicVisualizer extends PApplet {
         mute = loadImage("./icons/mute.png");
         unmute = loadImage("./icons/unmute.png");
         ff = loadImage("./icons/ff.png");
+        repeat = loadImage("./icons/repeat.png");
 
         // Fill mp3Files array with song paths from a text file
         try {
@@ -141,6 +149,7 @@ public class MusicVisualizer extends PApplet {
         // Initially, the music will be playing and not muted
         isPaused = false;
         isMuted = false;
+        isRepeating = false;
     }
 
     // =====================
@@ -152,20 +161,29 @@ public class MusicVisualizer extends PApplet {
 
         // Check if the next song should be played
         if (!audio[counter].isPlaying() && !isPaused) {
-            // Increment count, thereby moving to the next song
-            counter++;
+            // Check if the current song should be repeated
+            if (!isRepeating) {
+                // Increment count, thereby moving to the next song
+                counter++;
 
-            if (counter > songCount - 1) {
-                // Return to the first song
-                counter = 0;
+                if (counter > songCount - 1) {
+                    // Return to the first song
+                    counter = 0;
+                }
+
+                // Play the next song
+                audio[counter].play();
+
+                // Rewind the previous audio track
+                int idxToRewind = (counter - 1) < 0 ? songCount - 1 : (counter - 1);
+                audio[idxToRewind].rewind();
+            } else {
+                // Rewind the current song
+                audio[counter].rewind();
+
+                // Play the current song again
+                audio[counter].play();
             }
-
-            // Play the next song
-            audio[counter].play();
-
-            // Rewind the previous audio track
-            int idxToRewind = (counter - 1) < 0 ? songCount - 1 : (counter - 1);
-            audio[idxToRewind].rewind();
         }
 
         // Grab the audio buffers for the left and right channels of the music
@@ -183,6 +201,9 @@ public class MusicVisualizer extends PApplet {
 
         // Draw the fast-forward button
         drawFFButton();
+
+        // Draw the repeat button
+        drawRepeatButton();
 
         // Iterate over every sample in the music
         for (int i = 0; i < leftChannel.length - 1; i++) {
@@ -283,6 +304,24 @@ public class MusicVisualizer extends PApplet {
         image(ff, ffCoors[0], ffCoors[1]);
     }
 
+    // Method to draw the repeat button
+    private void drawRepeatButton() {
+        // Check if the mouse is on top of the button
+        int btnAlpha = mouseOver(repeatCoors[0], repeatCoors[1], repeat.width, repeat.height) ? buttonHoverAlpha : 255;
+
+        // Determine the color that the button should be
+        int btnColor = isRepeating ? color(156, 228, 255): color(255);
+
+        // Tint the button with appropriate color and transparency
+        tint(btnColor, btnAlpha);
+
+        // Resize the image
+        repeat.resize(50, 50);
+
+        // Draw the repeat button
+        image(repeat, repeatCoors[0], repeatCoors[1]);
+    }
+
     // Method to handle the mouse hovering over buttons
     private boolean mouseOver(int x, int y, int width, int height) {
         // Return if the mouse is inside of the given borders
@@ -304,6 +343,11 @@ public class MusicVisualizer extends PApplet {
         // If the mouse is over the fast-forward button, move to the next song
         if (mouseOver(ffCoors[0], ffCoors[1], ff.width, ff.height)) {
             fastForward();
+        }
+
+        // If the mouse is over the repeat button, make the current song repeat
+        if (mouseOver(repeatCoors[0], repeatCoors[1], repeat.width, repeat.height)) {
+            toggleRepeat();
         }
     }
 
@@ -345,5 +389,11 @@ public class MusicVisualizer extends PApplet {
         // Rewind the previous audio track
         int idxToRewind = (counter - 1) < 0 ? songCount - 1 : (counter - 1);
         audio[idxToRewind].rewind();
+    }
+
+    // Method to toggle repeat on a song on/off
+    private void toggleRepeat() {
+        // If the song is not repeating make it do so, and vice versa
+        isRepeating = !isRepeating;
     }
 }
