@@ -39,9 +39,13 @@ public class MusicVisualizer extends PApplet {
     PImage mute;
     PImage unmute;
 
+    // Image for fast-forward icon
+    PImage ff;
+
     // Coordinates for play/pause button
     private final int[] pauseCoors = {20, 20};
     private final int[] muteCoors = {90, 20};
+    private final int[] ffCoors = {160, 20};
 
     // Colors for channels
     private final int leftChannelColor = color(37, 152, 230);
@@ -76,6 +80,7 @@ public class MusicVisualizer extends PApplet {
         pause = loadImage("./icons/pause.png");
         mute = loadImage("./icons/mute.png");
         unmute = loadImage("./icons/unmute.png");
+        ff = loadImage("./icons/ff.png");
 
         // Fill mp3Files array with song paths from a text file
         try {
@@ -172,6 +177,9 @@ public class MusicVisualizer extends PApplet {
         // Draw the mute/unmute buttons
         drawUnmuteButtons();
 
+        // Draw the fast-forward button
+        drawFFButton();
+
         // Iterate over every sample in the music
         for (int i = 0; i < leftChannel.length - 1; i++) {
             // Draw the left channel
@@ -256,6 +264,21 @@ public class MusicVisualizer extends PApplet {
         image(imageToDraw, muteCoors[0], muteCoors[1]);
     }
 
+    // Method to draw the fast-forward button
+    private void drawFFButton() {
+        // Check if the mouse is on top of the button
+        int btnAlpha = mouseOver(ffCoors[0], ffCoors[1], ff.width, ff.height) ? 175 : 255;
+
+        // Tint the button with appropriate color and transparency
+        tint(255, btnAlpha);
+
+        // Resize the image
+        ff.resize(50, 50);
+
+        // Draw the fast-forward icon
+        image(ff, ffCoors[0], ffCoors[1]);
+    }
+
     // Method to handle the mouse hovering over buttons
     private boolean mouseOver(int x, int y, int width, int height) {
         // Return if the mouse is inside of the given borders
@@ -272,6 +295,11 @@ public class MusicVisualizer extends PApplet {
         // If the mouse is over the mute/unmute buttons, toggle volume on/off
         if (mouseOver(muteCoors[0], muteCoors[1], mute.width, mute.height)) {
             toggleMute();
+        }
+
+        // If the mouse is over the fast-forward button, move to the next song
+        if (mouseOver(ffCoors[0], ffCoors[1], ff.width, ff.height)) {
+            fastForward();
         }
     }
 
@@ -291,5 +319,27 @@ public class MusicVisualizer extends PApplet {
 
         if (isMuted) audio[counter].mute();
         else audio[counter].unmute();
+    }
+
+    // Method to fast-forward to the next song
+    private void fastForward() {
+        // Stop the current song
+        audio[counter].pause();
+
+        // Increment count, thereby moving to the next song
+        counter++;
+
+        if (counter > songCount - 1) {
+            // Return to the first song
+            counter = 0;
+        }
+
+        // Play the next song, as long as the player isn't paused
+        if (!isPaused) audio[counter].play();
+        else audio[counter].pause();
+
+        // Rewind the previous audio track
+        int idxToRewind = (counter - 1) < 0 ? songCount - 1 : (counter - 1);
+        audio[idxToRewind].rewind();
     }
 }
