@@ -5,7 +5,7 @@ Utilizes the Processing and Minim libraries (not included).
 Place desired mp3 files in resources folder. Then specify the names of the files excluding the mp3 file extension to 
 play them in that order in `resources/songPaths.txt`.
 
-##Installation Instructions
+## Installation Instructions
 1. Download the Java Development Kit for [Windows](https://drive.google.com/file/d/1vJrxn9tQhOxM_HJVTN0-Uld1aCxeiSKa/view) or [Mac](https://drive.google.com/file/d/1BAnsoIs9-pu2WoZJHUbNSY9c2LQ1-wMe/view).
 2. Download [IntelliJ community edition](https://www.jetbrains.com/idea/download/#section=windows), run the exe, and follow the instructions to download the software.
 3. Download the [Processing Library](https://processing.org/download/) and unzip the file.
