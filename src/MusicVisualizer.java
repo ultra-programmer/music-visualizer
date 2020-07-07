@@ -51,6 +51,10 @@ public class MusicVisualizer extends PApplet {
     private final int leftChannelColor = color(37, 152, 230);
     private final int rightChannelColor = color(26, 111, 214);
 
+    // Colors for buttons
+    private final int buttonColor = color(255);
+    private final int buttonHoverAlpha = 175;
+
     // ===========
     // Main method
     // ===========
@@ -233,10 +237,10 @@ public class MusicVisualizer extends PApplet {
     // Method to draw the play/pause buttons
     private void drawPauseButtons() {
         // Check if the mouse is on top of the button
-        int btnAlpha = mouseOver(pauseCoors[0], pauseCoors[1], pause.width, pause.height) ? 175 : 255;
+        int btnAlpha = mouseOver(pauseCoors[0], pauseCoors[1], pause.width, pause.height) ? buttonHoverAlpha : 255;
 
         // Tint the button with appropriate color and transparency
-        tint(255, btnAlpha);
+        tint(buttonColor, btnAlpha);
 
         // Determine which images to draw
         PImage playPauseImageToDraw = isPaused ? play : pause;
@@ -248,10 +252,10 @@ public class MusicVisualizer extends PApplet {
     // Method to draw the mute/unmute buttons
     private void drawUnmuteButtons() {
         // Check if the mouse is on top of the button
-        int btnAlpha = mouseOver(muteCoors[0], muteCoors[1], mute.width, mute.height) ? 175 : 255;
+        int btnAlpha = mouseOver(muteCoors[0], muteCoors[1], mute.width, mute.height) ? buttonHoverAlpha : 255;
 
         // Tint the button with appropriate color and transparency
-        tint(255, btnAlpha);
+        tint(buttonColor, btnAlpha);
 
         // Resize images
         mute.resize(50, 50);
@@ -267,10 +271,10 @@ public class MusicVisualizer extends PApplet {
     // Method to draw the fast-forward button
     private void drawFFButton() {
         // Check if the mouse is on top of the button
-        int btnAlpha = mouseOver(ffCoors[0], ffCoors[1], ff.width, ff.height) ? 175 : 255;
+        int btnAlpha = mouseOver(ffCoors[0], ffCoors[1], ff.width, ff.height) ? buttonHoverAlpha : 255;
 
         // Tint the button with appropriate color and transparency
-        tint(255, btnAlpha);
+        tint(buttonColor, btnAlpha);
 
         // Resize the image
         ff.resize(50, 50);
