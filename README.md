@@ -32,7 +32,7 @@ play them in that order in `resources/songPaths.txt`.
 15. Close the Project Structure window.
 16. On the left-hand side of IntelliJ, expand the `music-visualizer-master` folder, and then the `src` folder.
 17. Double click on the `MusicVisualizer` file inside of `src` to open it.
-18. If all went well, you should be able to click the ▶ (play) icon on line 10 next to the `public class MusicVisualizer extends PApplet` line to run the code.
+18. If all went well, you should be able to click the ▶ (play) icon on line 10 next to the `public class MusicVisualizer extends PApplet` line to run the code. Alternatively, when in the `MusicVisualizer.java` class, press `ctrl` (or `command` on MacOS) + `shift` + `fn` + `f10` to run the program.
 
 **Note:** To change the songs that are being played, you must first download the mp3 file and add it to the resources directory, and then list the file's name excluding the `.mp3` extension in `resources/songPaths.txt` to have it play when the Java class is run.
 
