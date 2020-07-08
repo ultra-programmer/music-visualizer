@@ -45,6 +45,9 @@ public class MusicVisualizer extends PApplet {
     // Image for fast-forward icon
     PImage ff;
 
+    // Image for rewind icon
+    PImage rr;
+
     // Image for repeat button
     PImage repeat;
 
@@ -52,6 +55,7 @@ public class MusicVisualizer extends PApplet {
     private final int[] pauseCoors = {20, 20};
     private final int[] muteCoors = {90, 20};
     private final int[] ffCoors = {160, 20};
+    private final int[] rrCoors = {300, 20};
     private final int[] repeatCoors = {230, 20};
 
     // Colors for channels
@@ -92,6 +96,7 @@ public class MusicVisualizer extends PApplet {
         mute = loadImage("./icons/mute.png");
         unmute = loadImage("./icons/unmute.png");
         ff = loadImage("./icons/ff.png");
+        rr = loadImage("./icons/rr.png");
         repeat = loadImage("./icons/repeat.png");
 
         // Fill mp3Files array with song paths from a text file
@@ -202,6 +207,9 @@ public class MusicVisualizer extends PApplet {
         // Draw the fast-forward button
         drawFFButton();
 
+        // Draw the rewind button
+        drawRRButton();
+
         // Draw the repeat button
         drawRepeatButton();
 
@@ -304,6 +312,21 @@ public class MusicVisualizer extends PApplet {
         image(ff, ffCoors[0], ffCoors[1]);
     }
 
+    // Method to draw the fast-forward button
+    private void drawRRButton() {
+        // Check if the mouse is on top of the button
+        int btnAlpha = mouseOver(rrCoors[0], rrCoors[1], rr.width, rr.height) ? buttonHoverAlpha : 255;
+
+        // Tint the button with appropriate color and transparency
+        tint(buttonColor, btnAlpha);
+
+        // Resize the image
+        rr.resize(50, 50);
+
+        // Draw the fast-forward icon
+        image(rr, rrCoors[0], rrCoors[1]);
+    }
+
     // Method to draw the repeat button
     private void drawRepeatButton() {
         // Check if the mouse is on top of the button
@@ -343,6 +366,11 @@ public class MusicVisualizer extends PApplet {
         // If the mouse is over the fast-forward button, move to the next song
         if (mouseOver(ffCoors[0], ffCoors[1], ff.width, ff.height)) {
             fastForward();
+        }
+
+        // If the mouse is over the rewind button, move to the previous song
+        if (mouseOver(rrCoors[0], rrCoors[1], rr.width, rr.height)) {
+            rewind();
         }
 
         // If the mouse is over the repeat button, make the current song repeat
@@ -388,6 +416,28 @@ public class MusicVisualizer extends PApplet {
 
         // Rewind the previous audio track
         int idxToRewind = (counter - 1) < 0 ? songCount - 1 : (counter - 1);
+        audio[idxToRewind].rewind();
+    }
+
+    // Method to move to the previous song
+    private void rewind() {
+        // Stop the current song
+        audio[counter].pause();
+
+        // Decrement count, thereby moving to the previous song
+        counter--;
+
+        if (counter < 0) {
+            // Return to the first song
+            counter = songCount - 1;
+        }
+
+        // Play the next song, as long as the player isn't paused
+        if (!isPaused) audio[counter].play();
+        else audio[counter].pause();
+
+        // Rewind the previously played audio track
+        int idxToRewind = (counter + 1) > songCount - 1 ? 0 : (counter + 1);
         audio[idxToRewind].rewind();
     }
 
