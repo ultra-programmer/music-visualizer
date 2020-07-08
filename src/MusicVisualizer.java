@@ -414,6 +414,10 @@ public class MusicVisualizer extends PApplet {
         if (!isPaused) audio[counter].play();
         else audio[counter].pause();
 
+        // Check if the music's volume should be on
+        if (isMuted) audio[counter].mute();
+        else audio[counter].unmute();
+
         // Rewind the previous audio track
         int idxToRewind = (counter - 1) < 0 ? songCount - 1 : (counter - 1);
         audio[idxToRewind].rewind();
@@ -435,6 +439,10 @@ public class MusicVisualizer extends PApplet {
         // Play the next song, as long as the player isn't paused
         if (!isPaused) audio[counter].play();
         else audio[counter].pause();
+
+        // Check if the music's volume should be on
+        if (isMuted) audio[counter].mute();
+        else audio[counter].unmute();
 
         // Rewind the previously played audio track
         int idxToRewind = (counter + 1) > songCount - 1 ? 0 : (counter + 1);
