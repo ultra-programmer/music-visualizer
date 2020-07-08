@@ -237,6 +237,9 @@ public class MusicVisualizer extends PApplet {
         }
     }
 
+    // =======================================================
+    // Methods to Draw the Frequency and Channels of the Music
+    // =======================================================
     // Method to draw the channels of music
     private void drawChannel(float[] channel, int index, int direction, int color) {
         // Make the lines have a thickness of 2
@@ -271,6 +274,9 @@ public class MusicVisualizer extends PApplet {
         }
     }
 
+    // ===============================
+    // Methods to Draw Various Buttons
+    // ===============================
     // Method to draw the play/pause buttons
     private void drawPauseButtons() {
         // Check if the mouse is on top of the button
@@ -353,6 +359,9 @@ public class MusicVisualizer extends PApplet {
         image(repeat, repeatCoors[0], repeatCoors[1]);
     }
 
+    // ====================
+    // Mouse Event Handlers
+    // ====================
     // Method to handle the mouse hovering over buttons
     private boolean mouseOver(int x, int y, int width, int height) {
         // Return if the mouse is inside of the given borders
@@ -387,6 +396,9 @@ public class MusicVisualizer extends PApplet {
         }
     }
 
+    // ================
+    // Button Functions
+    // ================
     // Method to toggle the music on/off
     private void togglePause() {
         // If the music is being played, stop it and vice versa
