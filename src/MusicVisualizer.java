@@ -52,11 +52,11 @@ public class MusicVisualizer extends PApplet {
     PImage repeat;
 
     // Coordinates for play/pause button
-    private final int[] pauseCoors = {20, 20};
-    private final int[] muteCoors = {90, 20};
+    private final int[] pauseCoors = {90, 20};
+    private final int[] muteCoors = {860, 20};
     private final int[] ffCoors = {160, 20};
-    private final int[] rrCoors = {300, 20};
-    private final int[] repeatCoors = {230, 20};
+    private final int[] rrCoors = {20, 20};
+    private final int[] repeatCoors = {930, 20};
 
     // Colors for channels
     private final int leftChannelColor = color(37, 152, 230);
