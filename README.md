@@ -12,6 +12,8 @@ play them in that order in `resources/songPaths.txt`.
 4. Download [Minim](http://code.compartmental.net/tools/minim/) by scrolling down and clicking the Minim zip file, and unzipping it.
 5. Download and unzip this GitHub repository's code.
 
+**Note:** For an easier way to download and run the music visualizer, click [here](https://github.com/ultra-programmer/music-visualizer-jar) and follow the instructions on the `README.md` file.
+
 ## Running Instructions
 1. Open IntelliJ and either
     * Select the open/import option.
