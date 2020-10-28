@@ -37,13 +37,3 @@ play them in that order in `resources/songPaths.txt`.
 18. If all went well, you should be able to click the ▶ (play) icon on line 10 next to the `public class MusicVisualizer extends PApplet` line to run the code. Alternatively, when in the `MusicVisualizer.java` class, press `ctrl` (or `command` on MacOS) + `shift` + `fn` + `f10` to run the program.
 
 **Note:** To change the songs that are being played, you must first download the mp3 file and add it to the resources directory, and then list the file's name excluding the `.mp3` extension in `resources/songPaths.txt` to have it play when the Java class is run.
-
-### Sample song credits:
-**Aria of the Soul | Super Smash Bros. Ultimate:** 31 Horas Music
-<br>https://www.youtube.com/watch?v=DZUqZluxqDs
-
-**ARMS Grand Prix Official Theme Song | Super Smash Bros. Ultimate:** 31 Horas Music
-<br>https://www.youtube.com/watch?v=o0bQdpTkLTc
-
-**K.K. Jazz (Aircheck):** PieJee1
-<br>https://www.youtube.com/watch?v=jC2KB0CtXq4&t=8s
