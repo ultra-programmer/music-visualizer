@@ -6,7 +6,7 @@ Place desired mp3 files in resources folder. Then specify the names of the files
 play them in that order in `resources/songPaths.txt`.
 
 ## Installation Instructions
-1. Download the Java Development Kit for [Windows](https://drive.google.com/file/d/1vJrxn9tQhOxM_HJVTN0-Uld1aCxeiSKa/view) or [Mac](https://drive.google.com/file/d/1BAnsoIs9-pu2WoZJHUbNSY9c2LQ1-wMe/view).
+1. Download the [Java Development Kit](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
 2. Download [IntelliJ community edition](https://www.jetbrains.com/idea/download/#section=windows), run the exe, and follow the instructions to download the software.
 3. Download the [Processing Library](https://processing.org/download/) and unzip the file.
 4. Download [Minim](http://code.compartmental.net/tools/minim/) by scrolling down and clicking the Minim zip file, and unzipping it.
